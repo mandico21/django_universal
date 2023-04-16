@@ -18,7 +18,7 @@ class CategoryNodeSerializer(serializers.Serializer):
         return CategorySerializer(obj.category).data
 
 
-class CategorySerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    name = serializers.CharField()
-    description = serializers.CharField()
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'description']

@@ -28,7 +28,9 @@ class ViewCategory(APIView):
         tags=['Категории'],
         operation_summary='Получение всех категорий',
         operation_description="Метод вернет все категории",
-        responses={200: CategorySerializer(many=True)},
+        responses={
+            200: CategorySerializer(many=True)
+        },
     )
     @standardize_response(200)
     def get(self, request: Request) -> Response:

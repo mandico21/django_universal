@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     'apps.product.apps.ProductConfig',
+    'apps.shop.apps.ShopConfig',
 ]
 
 MIDDLEWARE = [

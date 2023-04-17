@@ -12,8 +12,8 @@ class ViewCategoryStructure(APIView):
 
     @swagger_auto_schema(
         tags=['Категории'],
+        operation_id='view_category_structure',
         operation_summary='Получение категорий в структуре',
-        operation_description="Метод вернет все категории разделенные по группа",
         responses={200: CategoryNodeSerializer(many=True)},
     )
     @standardize_response(200)
@@ -26,8 +26,8 @@ class ViewCategory(APIView):
 
     @swagger_auto_schema(
         tags=['Категории'],
+        operation_id='view_category',
         operation_summary='Получение всех категорий',
-        operation_description="Метод вернет все категории",
         responses={
             200: CategorySerializer(many=True)
         },

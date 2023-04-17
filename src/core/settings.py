@@ -55,6 +55,14 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'core.responses.custom_exception_handler'
+}
+
+SWAGGER_SETTINGS = {
+    "DISPLAY_OPERATION_ID": False,
+}
+
 WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {

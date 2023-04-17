@@ -9,10 +9,10 @@ class CategoryNodeSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     category = serializers.SerializerMethodField('_get_category')
     parentId = serializers.IntegerField(source='parent_id')
-    children = serializers.SerializerMethodField('_get_children')
+    childrens = serializers.SerializerMethodField('_get_childrens')
 
-    def _get_children(self, obj: CategoryNode) -> dict[str, Any]:
-        return CategoryNodeSerializer(obj.children.all(), many=True).data
+    def _get_childrens(self, obj: CategoryNode) -> dict[str, Any]:
+        return CategoryNodeSerializer(obj.childrens.all(), many=True).data
 
     def _get_category(self, obj: CategoryNode) -> dict[str, Any]:
         return CategorySerializer(obj.category).data

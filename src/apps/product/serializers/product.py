@@ -9,14 +9,24 @@ from apps.shop.serlializers.shop import ShopSerializer
 class ProductTypeSerializer(serializers.Serializer):
     article = serializers.IntegerField()
     categoryId = serializers.IntegerField(source='category_id')
+    brand = serializers.CharField(source='brand.name')
+    images = serializers.SerializerMethodField('_get_image')
     name = serializers.CharField()
     description = serializers.CharField()
     basePrice = serializers.DecimalField(max_digits=10, decimal_places=2, source='base_price')
     price = serializers.DecimalField(max_digits=10, decimal_places=2)
+    discount = serializers.IntegerField()
+    attributes = serializers.SerializerMethodField('_get_attributes')
     info = serializers.SerializerMethodField('_get_info')
 
     def _get_info(self, obj: ProductType) -> dict[str, Any]:
         return ProductSerializer(obj.products.all(), many=True).data
+
+    def _get_attributes(self, obj: ProductType) -> dict[str, Any]:
+        return ProductAttributeSerializer(obj.attributes.order_by('attribute__name').all(), many=True).data
+
+    def _get_image(self, obj: ProductType) -> list[Any]:
+        return [str(im.image) for im in obj.images.all()]
 
 
 class ProductTypeListSerializer(serializers.Serializer):
@@ -37,3 +47,9 @@ class ProductSerializer(serializers.Serializer):
 
     def _get_shop(self, obj: Product) -> dict[str, Any]:
         return ShopSerializer(obj.shop).data
+
+
+class ProductAttributeSerializer(serializers.Serializer):
+    name = serializers.CharField(source='attribute.name')
+    meaning = serializers.CharField()
+    value = serializers.CharField()

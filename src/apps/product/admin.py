@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from apps.product.models import Category, CategoryNode, ProductType, Product
+from apps.product.models import Category, CategoryNode, ProductType, Product, Attribute, ProductAttribute, \
+    AttributeValue
 
 
 @admin.register(Category)
@@ -21,3 +22,18 @@ class ProductTypeAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('product', 'shop', 'quantity',)
+
+
+@admin.register(Attribute)
+class AttributeAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+@admin.register(AttributeValue)
+class AttributeValueAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description', 'slug',)
+
+
+@admin.register(ProductAttribute)
+class ProductAttributeAdmin(admin.ModelAdmin):
+    list_display = ('product', 'attribute', 'value')

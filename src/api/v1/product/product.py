@@ -1,7 +1,7 @@
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework.generics import RetrieveAPIView, ListAPIView
 from rest_framework.request import Request
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
 from api.v1.product.exceptions import ProductNotFoundException
 from apps.product.models import ProductType
@@ -9,7 +9,7 @@ from apps.product.serializers.product import ProductTypeSerializer, ProductTypeL
 from core.responses import standardize_response
 
 
-class ViewProduct(APIView):
+class ViewProduct(RetrieveAPIView):
 
     @swagger_auto_schema(
         tags=['Товары'],
@@ -28,7 +28,7 @@ class ViewProduct(APIView):
         return ProductTypeSerializer(product).data
 
 
-class ViewProductByCategory(APIView):
+class ViewProductByCategory(ListAPIView):
 
     @swagger_auto_schema(
         tags=['Товары'],
@@ -42,6 +42,25 @@ class ViewProductByCategory(APIView):
     @standardize_response(200)
     def get(self, request: Request, category_id: int) -> None:
         products = ProductType.objects.filter(category_id=category_id).all()
+        if not products:
+            raise ProductNotFoundException
+        return ProductTypeListSerializer(products, many=True).data
+
+
+class ViewProductByBrand(ListAPIView):
+
+    @swagger_auto_schema(
+        tags=['Товары'],
+        operation_id='view_product_by_category',
+        operation_summary='Получить товары по бренду',
+        responses={
+            200: ProductTypeListSerializer(),
+            404: 'Not Found'
+        }
+    )
+    @standardize_response(200)
+    def get(self, request: Request, brand_id: int) -> None:
+        products = ProductType.objects.filter(brand_id=brand_id).all()
         if not products:
             raise ProductNotFoundException
         return ProductTypeListSerializer(products, many=True).data

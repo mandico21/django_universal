@@ -1,14 +1,14 @@
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.request import Request
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
 from apps.product.models import CategoryNode, Category
 from apps.product.serializers.category import CategoryNodeSerializer, CategorySerializer
 from core.responses import standardize_response
 
 
-class ViewCategoryStructure(APIView):
+class ViewCategoryStructure(RetrieveAPIView):
 
     @swagger_auto_schema(
         tags=['Категории'],
@@ -22,7 +22,7 @@ class ViewCategoryStructure(APIView):
         return CategoryNodeSerializer(c, many=True).data
 
 
-class ViewCategory(APIView):
+class ViewCategory(ListAPIView):
 
     @swagger_auto_schema(
         tags=['Категории'],

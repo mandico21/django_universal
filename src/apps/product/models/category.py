@@ -5,15 +5,12 @@ from apps.product.models import TimedBaseModel
 
 class Category(TimedBaseModel):
     class Meta:
-        verbose_name = 'категория'
-        verbose_name_plural = 'категории'
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
 
-    id = models.IntegerField('id категории', primary_key=True)
-    name = models.CharField('название', max_length=64)
-    description = models.CharField('описание', max_length=120, null=True, blank=True)
-
-    def __repr__(self) -> str:
-        return f'Category ({self.name})'
+    id = models.IntegerField('ID категории', primary_key=True)
+    name = models.CharField('Название', max_length=64)
+    description = models.CharField('Описание', max_length=120, null=True, blank=True)
 
     def __str__(self) -> str:
         return f'{self.name}'
@@ -21,16 +18,17 @@ class Category(TimedBaseModel):
 
 class CategoryNode(TimedBaseModel):
     class Meta:
-        verbose_name = 'подкатегоря'
-        verbose_name_plural = 'подкатегории'
+        verbose_name = 'Подкатегория'
+        verbose_name_plural = 'Подкатегории'
 
-    id = models.IntegerField('id подкатегории', primary_key=True)
-    category = models.ForeignKey('Category', verbose_name='категория', on_delete=models.CASCADE)
+    id = models.IntegerField('ID подкатегории', primary_key=True)
+    category = models.ForeignKey('Category', verbose_name='Категория', on_delete=models.CASCADE)
     # parent_id = models.IntegerField('родитель', null=True, blank=True)
-    parent = models.ForeignKey('self', verbose_name='категория', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
-
-    def __repr__(self) -> str:
-        return f'CategoryNode ({self.id})'
+    parent = models.ForeignKey('self',
+                               verbose_name='ID подкатегории',
+                               on_delete=models.CASCADE,
+                               null=True, blank=True,
+                               related_name='childrens')
 
     def __str__(self) -> str:
         return f'{self.id} - {self.category.name}'

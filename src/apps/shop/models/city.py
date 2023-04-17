@@ -5,11 +5,11 @@ from apps.product.models import TimedBaseModel
 
 class City(TimedBaseModel):
     class Meta:
-        verbose_name = 'город'
-        verbose_name_plural = 'города'
+        verbose_name = 'Город'
+        verbose_name_plural = 'Города'
 
-    name = models.CharField('название')
-    code = models.CharField('код города')
+    name = models.CharField('Название')
+    code = models.CharField('Код города')
 
     def __str__(self) -> str:
         return f'{self.name} - {self.code}'

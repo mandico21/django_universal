@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'apps.shop.apps.ShopConfig',
     'apps.brands.apps.BrandsConfig',
     'apps.imageledger.apps.ImageledgerConfig',
+    'apps.review.apps.ReviewConfig',
 ]
 
 MIDDLEWARE = [

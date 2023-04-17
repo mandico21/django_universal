@@ -3,6 +3,7 @@ from typing import Any
 from rest_framework import serializers
 
 from apps.product.models import Product, ProductType
+from apps.review.serializers import ReviewSerializer
 from apps.shop.serlializers.shop import ShopSerializer
 
 
@@ -18,6 +19,7 @@ class ProductTypeSerializer(serializers.Serializer):
     discount = serializers.IntegerField()
     attributes = serializers.SerializerMethodField('_get_attributes')
     info = serializers.SerializerMethodField('_get_info')
+    reviews = serializers.SerializerMethodField('_get_review')
 
     def _get_info(self, obj: ProductType) -> dict[str, Any]:
         return ProductSerializer(obj.products.all(), many=True).data
@@ -27,6 +29,9 @@ class ProductTypeSerializer(serializers.Serializer):
 
     def _get_image(self, obj: ProductType) -> list[Any]:
         return [str(im.image) for im in obj.images.all()]
+
+    def _get_review(self, obj: ProductType) -> dict[str, Any]:
+        return ReviewSerializer(obj.reviews.all(), many=True).data
 
 
 class ProductTypeListSerializer(serializers.Serializer):

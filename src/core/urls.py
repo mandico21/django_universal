@@ -10,6 +10,7 @@ from core.yasg import urlpatterns2
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/v1/", include(api_url)),
+    path('silk/', include('silk.urls', namespace='silk')),
 ]
 urlpatterns += urlpatterns2
 

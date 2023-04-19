@@ -9,7 +9,7 @@ class ReviewSerializer(serializers.Serializer):
 
 
 class CreateReviewSerializer(serializers.Serializer):
-    productId = serializers.IntegerField(source='product_id')
+    product_id = serializers.IntegerField()
     name = serializers.CharField()
     phone = serializers.CharField()
     dignity = serializers.CharField()

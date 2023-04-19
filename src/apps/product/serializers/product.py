@@ -10,7 +10,7 @@ from apps.shop.serlializers.shop import ShopSerializer
 class ProductTypeSerializer(serializers.Serializer):
     article = serializers.IntegerField()
     categoryId = serializers.IntegerField(source='category_id')
-    brand = serializers.CharField(source='brand.name')
+    # brand = serializers.CharField(source='brand.name') # TODO Переделать
     images = serializers.SerializerMethodField('_get_image')
     name = serializers.CharField()
     description = serializers.CharField()

@@ -5,10 +5,10 @@ from api.v1.product.product import ViewProduct, ViewProductByCategory, ViewProdu
 from api.v1.review.review import CreateNewReview
 
 urlpatterns = [
-    path('categories/sctructures', ViewCategoryStructure.as_view()),
-    path('categories/', ViewCategory.as_view()),
-    path('products/article=<int:article>', ViewProduct.as_view()),
-    path('products/categoryId=<int:category_id>', ViewProductByCategory.as_view()),
-    path('products/brandId=<int:brand_id>', ViewProductByBrand.as_view()),
-    path('reviews/', CreateNewReview.as_view()),
+    path(r'categories/sctructures', ViewCategoryStructure.as_view(), name='categories-sctructures'),
+    path(r'categories/', ViewCategory.as_view(), name='categories-list'),
+    path(r'products/article=<int:article>', ViewProduct.as_view(), name='products-article'),
+    path(r'products/categoryId=<int:category_id>', ViewProductByCategory.as_view(), name='products-category'),
+    path(r'products/brandId=<int:brand_id>', ViewProductByBrand.as_view(), name='products-brand'),
+    path(r'reviews/', CreateNewReview.as_view(), name='reviews-create'),
 ]

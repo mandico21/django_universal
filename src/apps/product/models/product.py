@@ -22,7 +22,7 @@ class ProductType(TimedBaseModel):
                               on_delete=models.CASCADE,
                               null=True, blank=True,
                               related_name='product_types')
-    images = models.ManyToManyField(ImageLedger, null=True, blank=True, related_name='product_images')
+    images = models.ManyToManyField(ImageLedger, blank=True, related_name='product_images')
     name = models.CharField('Название', max_length=60)
     description = models.TextField('Описание', null=True, blank=True)
     base_price = models.DecimalField('Базовая цена', max_digits=10, decimal_places=2)

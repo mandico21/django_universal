@@ -12,6 +12,10 @@ DEBUG = env.bool('DEBUG')
 
 ALLOWED_HOSTS = []
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -23,12 +27,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'silk',
+    'debug_toolbar',
 
     'apps.product.apps.ProductConfig',
     'apps.shop.apps.ShopConfig',
     'apps.brands.apps.BrandsConfig',
     'apps.imageledger.apps.ImageledgerConfig',
     'apps.review.apps.ReviewConfig',
+    'apps.clients.apps.ClientsConfig',
 ]
 
 MIDDLEWARE = [
@@ -41,6 +47,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'silk.middleware.SilkyMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'

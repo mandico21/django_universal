@@ -3,6 +3,7 @@ from django.db import models
 
 class TimedBaseModel(models.Model):
     """Основная модель с датой"""
+    # TODO перенести модель в core
 
     class Meta:
         abstract = True

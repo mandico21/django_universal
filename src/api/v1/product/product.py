@@ -51,7 +51,7 @@ class ViewProductByBrand(ListAPIView):
 
     @swagger_auto_schema(
         tags=['Товары'],
-        operation_id='view_product_by_category',
+        operation_id='view_product_by_brand',
         operation_summary='Получить товары по бренду',
         responses={
             200: ProductTypeListSerializer(),

@@ -10,7 +10,7 @@ from apps.shop.serlializers.shop import ShopSerializer
 class ProductTypeSerializer(serializers.Serializer):
     article = serializers.IntegerField()
     categoryId = serializers.IntegerField(source='category_id')
-    brand = serializers.CharField(source='brand.name')
+    brand = serializers.SerializerMethodField('_get_brand')
     images = serializers.SerializerMethodField('_get_image')
     name = serializers.CharField()
     description = serializers.CharField()
@@ -32,6 +32,9 @@ class ProductTypeSerializer(serializers.Serializer):
 
     def _get_review(self, obj: ProductType) -> dict[str, Any]:
         return ReviewSerializer(obj.reviews.all(), many=True).data
+
+    def _get_brand(self, obj: ProductType) -> str:
+        return obj.brand.name if obj.brand else None
 
 
 class ProductTypeListSerializer(serializers.Serializer):

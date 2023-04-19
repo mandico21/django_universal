@@ -3,6 +3,7 @@ from django.db import models
 from apps.brands.models import Brand
 from apps.imageledger.models import ImageLedger
 from apps.product.models import TimedBaseModel
+from apps.product.services.discount_percentage import DiscountPercentage
 from apps.shop.models import Shop
 
 
@@ -28,9 +29,8 @@ class ProductType(TimedBaseModel):
     price = models.DecimalField('Цена со скидкой', max_digits=10, decimal_places=2, null=True, blank=True)
 
     @property
-    def discount(self) -> int:
-        if self.base_price and self.price:
-            return int((self.price / self.base_price) * 100)
+    def discount(self) -> int | None:
+        return DiscountPercentage()(self.price, self.base_price)
 
     discount.fget.short_description = 'Скидка'
 

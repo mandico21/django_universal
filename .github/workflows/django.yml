@@ -27,23 +27,28 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v1.3
-        with:
-          DEBUG: true
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          file_name: .env_dist
-          fail_on_empty: false
-        env:
-          DEBUG: true
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+#      - name: Make envfile
+#        uses: SpicyPizza/create-envfile@v1.3
+#        with:
+#          DEBUG: true
+#          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+#          file_name: .env_dist
+#          fail_on_empty: false
+#        env:
+#          DEBUG: true
+#          SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
       - name: Run Tests
         run: |
           pytest -v
         env:
-          DEBUG: true
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: ${{ secrets.DEBUG }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASS: ${{ secrets.DB_PASS }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
 
       - name: Run flake8
         run: |

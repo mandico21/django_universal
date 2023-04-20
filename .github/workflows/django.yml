@@ -43,7 +43,7 @@ jobs:
           pytest -v
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DEBUG: false
+          DEBUG: true
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
           DB_NAME: ${{ secrets.DB_NAME }}

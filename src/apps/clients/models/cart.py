@@ -12,7 +12,7 @@ class Cart(TimedBaseModel):
     client = models.ForeignKey(Client,
                                verbose_name='Клиент',
                                on_delete=models.CASCADE,
-                               related_name='items')
+                               related_name='carts')
 
     def __str__(self) -> str:
         return f'Cart ({self.client_id})'
@@ -24,7 +24,7 @@ class Item(TimedBaseModel):
         verbose_name_plural = 'Товары в корзине'
 
     cart = models.ForeignKey(Cart,
-                             verbose_name='Клиент',
+                             verbose_name='Корзина',
                              on_delete=models.CASCADE,
                              related_name='items')
     product = models.ForeignKey(Product,

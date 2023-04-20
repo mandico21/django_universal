@@ -1,7 +1,7 @@
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.generics import CreateAPIView
 
-from api.v1.product.exceptions import ProductNotFoundException
+from apps.product.exceptions import ProductNotFoundException
 from apps.product.models import ProductType
 from apps.review.models import Review
 from apps.review.serializers import CreateReviewSerializer

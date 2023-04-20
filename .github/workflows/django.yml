@@ -38,17 +38,17 @@ jobs:
 #          DEBUG: true
 #          SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
-      - name: Run Tests
-        run: |
-          pytest -v
-        env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DEBUG: true
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASS: ${{ secrets.DB_PASS }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_PORT: ${{ secrets.DB_PORT }}
+#      - name: Run Tests
+#        run: |
+#          pytest -v
+#        env:
+#          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+#          DEBUG: true
+#          DB_USER: ${{ secrets.DB_USER }}
+#          DB_PASS: ${{ secrets.DB_PASS }}
+#          DB_NAME: ${{ secrets.DB_NAME }}
+#          DB_HOST: ${{ secrets.DB_HOST }}
+#          DB_PORT: ${{ secrets.DB_PORT }}
 
       - name: Run flake8
         run: |

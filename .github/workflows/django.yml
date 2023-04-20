@@ -34,6 +34,9 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           file_name: .env_dist
           fail_on_empty: false
+        env:
+          DEBUG: true
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
       - name: Run Tests
         run: |

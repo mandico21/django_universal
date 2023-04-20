@@ -30,8 +30,8 @@ jobs:
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1.3
         with:
-          envkey_DEBUG: true
-          envkey_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: true
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
           file_name: .env_dist
           fail_on_empty: false
 

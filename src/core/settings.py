@@ -10,10 +10,14 @@ env.read_env('.env')
 SECRET_KEY = env.str('SECRET_KEY')
 DEBUG = env.bool('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INTERNAL_IPS = [
-    "127.0.0.1",
+    '*',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    '*',
 ]
 
 INSTALLED_APPS = [
@@ -28,6 +32,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'silk',
     'debug_toolbar',
+    'corsheaders',
 
     'apps.shop.apps.ShopConfig',
     'apps.guide.apps.GuideConfig',
@@ -39,6 +44,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -47,6 +53,7 @@ MIDDLEWARE = [
 
     'silk.middleware.SilkyMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+
 ]
 
 ROOT_URLCONF = 'core.urls'

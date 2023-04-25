@@ -18,7 +18,8 @@ class ViewCategoryStructure(RetrieveAPIView):
     )
     @standardize_response(200)
     def get(self, request: Request) -> Response:
-        c = CategoryNode.objects.filter(parent_id=None).order_by('id').all()
+        c = CategoryNode.objects.filter(parent_id=None). \
+            select_related('category').prefetch_related('childrens').order_by('id').all()
         return CategoryNodeSerializer(c, many=True).data
 
 

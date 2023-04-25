@@ -2,17 +2,10 @@ from django.db import models
 
 from apps.shop.models import TimedBaseModel, Product
 from apps.user.models.client import Client
+from .status import Status
 
 
 class Cart(TimedBaseModel):
-    class Status(models.TextChoices):
-        NEW = "new", "Новая"
-        ACT = "active", "Активная"
-        ORD = "ordered", "Оформленная"
-        CLD = "cancelled", "Отмененная"
-        RFD = "refunded", "Возврат"
-        CMD = "completed", "Завершенная"
-
     class Meta:
         verbose_name = 'Корзина'
         verbose_name_plural = 'Корзины'

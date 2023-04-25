@@ -5,10 +5,10 @@ from rest_framework import serializers
 from rest_framework.request import Request
 from rest_framework.views import APIView
 
-from apps.clients.serializers.cart import ClientSerializer
-from apps.clients.serializers.item import CartSerializer
-from apps.clients.services.add_cart import AddCart
-from apps.clients.services.view_cart_client import ViewCartClient
+from apps.user.serializers.cart import ClientSerializer
+from apps.user.serializers.item import CartSerializer
+from apps.user.services.add_cart import AddCart
+from apps.user.services.view_cart_client import ViewCartClient
 from core.responses import standardize_response
 
 

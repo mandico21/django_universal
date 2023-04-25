@@ -4,11 +4,11 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework.generics import CreateAPIView
 from rest_framework.request import Request
 
-from apps.clients.serializers.item import CartSerializer, UpdateCartSerializer, \
+from apps.user.serializers.item import CartSerializer, UpdateCartSerializer, \
     DeleteCartSerializer
-from apps.clients.services.add_product_to_cart import AddProductCart
-from apps.clients.services.remove_product_to_cart import RemoveProductCart
-from apps.clients.services.update_product_to_cart import UpdateProductCart
+from apps.user.services.add_product_to_cart import AddProductCart
+from apps.user.services.remove_product_to_cart import RemoveProductCart
+from apps.user.services.update_product_to_cart import UpdateProductCart
 from core.responses import standardize_response
 
 

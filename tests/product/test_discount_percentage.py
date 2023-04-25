@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from apps.product.services.discount_percentage import DiscountPercentage
+from apps.shop.services.discount_percentage import DiscountPercentage
 
 
 class TestLogicDiscountPercentage:

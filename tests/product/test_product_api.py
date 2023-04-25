@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.status import HTTP_404_NOT_FOUND
 from rest_framework.test import APITestCase
 
-from apps.product.models import Category, CategoryNode, ProductType
+from apps.shop.models import Category, CategoryNode, ProductType
 
 ARTICLE_ID = 123
 

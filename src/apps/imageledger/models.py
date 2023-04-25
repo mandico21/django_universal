@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.product.models import TimedBaseModel
+from apps.shop.models import TimedBaseModel
 
 
 class ImageLedger(TimedBaseModel):

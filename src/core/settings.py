@@ -29,12 +29,11 @@ INSTALLED_APPS = [
     'silk',
     'debug_toolbar',
 
-    'apps.product.apps.ProductConfig',
     'apps.shop.apps.ShopConfig',
-    'apps.brands.apps.BrandsConfig',
+    'apps.guide.apps.GuideConfig',
     'apps.imageledger.apps.ImageledgerConfig',
-    'apps.review.apps.ReviewConfig',
-    'apps.clients.apps.ClientsConfig',
+    'apps.user.apps.UserConfig',
+    'apps.cart.apps.CartConfig',
 ]
 
 MIDDLEWARE = [

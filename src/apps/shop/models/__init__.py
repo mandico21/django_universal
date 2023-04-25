@@ -1,2 +1,3 @@
-from .city import *
-from .shop import *
+from .base import *
+from .category import *
+from .product import *

@@ -3,9 +3,9 @@ from rest_framework.generics import RetrieveAPIView, ListAPIView
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from apps.product.exceptions import ProductNotFoundException
-from apps.product.models import ProductType
-from apps.product.serializers.product import ProductTypeSerializer, ProductTypeListSerializer
+from apps.shop.exceptions import ProductNotFoundException
+from apps.shop.models import ProductType
+from apps.shop.serializers.product import ProductTypeSerializer, ProductTypeListSerializer
 from core.responses import standardize_response
 
 

@@ -3,8 +3,8 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from apps.product.models import CategoryNode, Category
-from apps.product.serializers.category import CategoryNodeSerializer, CategorySerializer
+from apps.shop.models import CategoryNode, Category
+from apps.shop.serializers.category import CategoryNodeSerializer, CategorySerializer
 from core.responses import standardize_response
 
 

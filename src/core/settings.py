@@ -17,7 +17,7 @@ INTERNAL_IPS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    '*',
+    'http://localhost:8000',
 ]
 
 INSTALLED_APPS = [

@@ -20,6 +20,10 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    '*'
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

@@ -6,6 +6,7 @@ colorama==0.4.6
 coreapi==2.3.3
 coreschema==0.0.4
 Django==4.2
+django-cors-headers==3.14.0
 django-debug-toolbar==4.0.0
 django-silk==5.0.3
 djangorestframework==3.14.0
@@ -34,9 +35,8 @@ pytz==2023.3
 requests==2.28.2
 ruamel.yaml==0.17.21
 sqlparse==0.4.3
+tqdm==4.65.0
 tzdata==2023.3
 uritemplate==4.1.1
 urllib3==1.26.15
-
-tqdm~=4.65.0
-uuid~=1.30
+uuid==1.30

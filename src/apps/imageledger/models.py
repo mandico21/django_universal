@@ -10,5 +10,9 @@ class ImageLedger(TimedBaseModel):
 
     image = models.ImageField('Изображение', upload_to='product')
 
+    @property
+    def url_path(self) -> str:
+        return f'django_universal/src/media/{self.image}'
+
     def __str__(self) -> str:
-        return f'{self.id}'
+        return f'{self.id} - {self.image}'

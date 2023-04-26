@@ -17,6 +17,7 @@ class CategoryNodeAdmin(admin.ModelAdmin):
 @admin.register(ProductType)
 class ProductTypeAdmin(admin.ModelAdmin):
     list_display = ('article', 'discount')
+    filter_horizontal = ('images',)
 
 
 @admin.register(Product)

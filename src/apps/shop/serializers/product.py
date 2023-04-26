@@ -12,6 +12,7 @@ class ProductTypeSerializer(serializers.Serializer):
     categoryId = serializers.IntegerField(source='category_id')
     brand = serializers.CharField()
     images = serializers.SerializerMethodField('_get_image')
+    poster = serializers.CharField(source='img_path')
     name = serializers.CharField()
     description = serializers.CharField()
     basePrice = serializers.DecimalField(max_digits=10, decimal_places=2, source='base_price')
@@ -22,13 +23,13 @@ class ProductTypeSerializer(serializers.Serializer):
     reviews = serializers.SerializerMethodField('_get_review')
 
     def _get_info(self, obj: ProductType) -> dict[str, Any]:
-        return ProductSerializer(obj.products.select_related(), many=True).data
+        return ProductSerializer(obj.products.select_related('warehouse'), many=True).data
 
     def _get_attributes(self, obj: ProductType) -> dict[str, Any]:
-        return ProductAttributeSerializer(obj.attributes.select_related(), many=True).data
+        return ProductAttributeSerializer(obj.attributes.select_related('attribute', 'value'), many=True).data
 
     def _get_image(self, obj: ProductType) -> list[Any]:
-        return [str(im.image) for im in obj.images.all()]
+        return [str(im.url_path) for im in obj.images.all()]
 
     def _get_review(self, obj: ProductType) -> dict[str, Any]:
         return ReviewSerializer(obj.reviews, many=True).data
@@ -40,6 +41,7 @@ class ProductTypeSerializer(serializers.Serializer):
 class ProductTypeListSerializer(serializers.Serializer):
     article = serializers.IntegerField()
     categoryId = serializers.IntegerField(source='category_id')
+    poster = serializers.CharField(source='img_path')
     name = serializers.CharField()
     basePrice = serializers.DecimalField(max_digits=10, decimal_places=2, source='base_price')
     price = serializers.DecimalField(max_digits=10, decimal_places=2)

@@ -23,7 +23,8 @@ class CategoryNode(TimedBaseModel):
         verbose_name_plural = 'Подкатегории'
 
     id = models.IntegerField('ID подкатегории', primary_key=True)
-    category = models.ForeignKey('Category', verbose_name='Категория', on_delete=models.CASCADE)
+    category = models.ForeignKey('Category', verbose_name='Категория', on_delete=models.CASCADE,
+                                 related_name='category_nodes')
     parent = models.ForeignKey('self',
                                verbose_name='ID подкатегории',
                                on_delete=models.CASCADE,

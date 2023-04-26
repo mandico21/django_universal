@@ -1,10 +1,10 @@
 from django.db import models
 
+from apps.guide.models import Warehouse
 from apps.guide.models.brand import Brand
 from apps.imageledger.models import ImageLedger
 from apps.shop.models import TimedBaseModel
 from apps.shop.services.discount_percentage import DiscountPercentage
-from apps.guide.models import Warehouse
 
 
 class ProductType(TimedBaseModel):
@@ -23,6 +23,7 @@ class ProductType(TimedBaseModel):
                               null=True, blank=True,
                               related_name='product_types')
     images = models.ManyToManyField(ImageLedger, blank=True, related_name='product_images')
+    poster = models.ImageField('Постер', upload_to='product/poster')
     name = models.CharField('Название', max_length=60)
     description = models.TextField('Описание', null=True, blank=True)
     base_price = models.DecimalField('Базовая цена', max_digits=10, decimal_places=2, null=True, blank=True)
@@ -33,6 +34,10 @@ class ProductType(TimedBaseModel):
         return DiscountPercentage()(self.price, self.base_price)
 
     discount.fget.short_description = 'Скидка'
+
+    @property
+    def img_path(self) -> str:
+        return f'django_universal/src/{self.poster}'
 
     def __str__(self) -> str:
         return f'{self.article} - {self.name}'

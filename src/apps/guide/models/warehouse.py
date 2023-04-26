@@ -17,4 +17,4 @@ class Warehouse(TimedBaseModel):
     email = models.CharField('Email', null=True, blank=True)
 
     def __str__(self) -> str:
-        return f'{self.name} - {self.phone}'
+        return f'{self.name} - {self.address}'

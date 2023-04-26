@@ -12,4 +12,4 @@ class City(TimedBaseModel):
     code = models.CharField('Код города')
 
     def __str__(self) -> str:
-        return f'{self.name} - {self.code}'
+        return f'{self.name}'

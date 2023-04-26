@@ -18,12 +18,14 @@ INTERNAL_IPS = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://77.91.78.85',
-    'http://188.162.166.23'
+    'http://188.162.166.23',
+    'http://localhost',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'http://77.91.78.85',
-    'http://188.162.166.23'
+    'http://188.162.166.23',
+    'http://localhost',
 ]
 
 INSTALLED_APPS = [

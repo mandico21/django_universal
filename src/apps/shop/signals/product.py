@@ -12,12 +12,16 @@ def clear_product_cache(
         **kwargs
 ) -> None:
     cache_key_product = f'product_type:article={instance.pk}'
-    cache.delete(cache_key_product)
     cache_key_category = \
         f'category_node_product_types:category_id={instance.category_id}'
-    cache.delete(cache_key_category)
     cache_key_brand = f'brand_product_types:brand_id={instance.brand_id}'
-    cache.delete(cache_key_brand)
+    
+    for k in [
+        cache_key_product,
+        cache_key_category,
+        cache_key_brand,
+    ]:
+        cache.delete(k)
 
 
 @receiver([post_save, post_delete], sender=CategoryNode)
@@ -31,11 +35,15 @@ def clear_category_node_cache(
         cache.delete(cache_key_product)
     cache_key_category = \
         f'category_node_product_types:category_id={instance.category_id}'
-    cache.delete(cache_key_category)
+
     cache_categories = 'categories'
-    cache.delete(cache_categories)
     cache_category_structure = 'category_structure'
-    cache.delete(cache_category_structure)
+    for k in [
+        cache_key_category,
+        cache_categories,
+        cache_category_structure,
+    ]:
+        cache.delete(k)
 
 
 @receiver([post_save, post_delete], sender=Category)
@@ -51,7 +59,11 @@ def clear_category_cache(
         for product_type in category_node.product_types.all():
             cache_key_product = f'product_type:article={product_type.article}'
             cache.delete(cache_key_product)
+
     cache_categories = 'categories'
-    cache.delete(cache_categories)
     cache_category_structure = 'category_structure'
-    cache.delete(cache_category_structure)
+    for k in [
+        cache_categories,
+        cache_category_structure,
+    ]:
+        cache.delete(k)

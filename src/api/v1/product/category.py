@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.request import Request
@@ -15,10 +16,17 @@ class ViewCategoryStructure(RetrieveAPIView):
         tags=['Категории'],
         operation_id='view_category_structure',
         operation_summary='Получить структуру категорий',
-        responses={200: CategoryNodeSerializer(many=True)},
+        responses={
+            200: CategoryNodeSerializer(many=True)
+        },
     )
     @standardize_response(200)
     def get(self, request: Request) -> Response:
+        cache_key = 'category_structure'
+        data = cache.get(cache_key)
+        if data:
+            return data
+
         c = CategoryNode.objects.filter(
             parent_id=None
         ).select_related(
@@ -26,7 +34,9 @@ class ViewCategoryStructure(RetrieveAPIView):
         ).prefetch_related(
             'childrens'
         ).order_by('id').all()
-        return CategoryNodeSerializer(c, many=True).data
+        data = CategoryNodeSerializer(c, many=True).data
+        cache.set(cache_key, data, 60 * 1000)
+        return data
 
 
 class ViewCategory(ListAPIView):
@@ -41,5 +51,12 @@ class ViewCategory(ListAPIView):
     )
     @standardize_response(200)
     def get(self, request: Request) -> Response:
+        cache_key = 'categories'
+        data = cache.get(cache_key)
+        if data:
+            return data
+
         c = Category.objects.order_by('id').all()
-        return CategorySerializer(c, many=True).data
+        data = CategorySerializer(c, many=True).data
+        cache.set(cache_key, data, 60 * 1000)
+        return data

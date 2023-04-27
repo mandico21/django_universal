@@ -20,7 +20,7 @@ class ItemAPI(CreateAPIView):
         operation_summary='Добавить товар в корзину клиента',
         responses={
             200: CartSerializer(),
-            404: "Not Found",
+            404: 'Not Found',
         },
         request_body=UpdateCartSerializer()
     )
@@ -37,7 +37,7 @@ class ItemAPI(CreateAPIView):
         operation_summary='Отредактировать товар в корзине клиента',
         responses={
             200: CartSerializer(),
-            404: "Not Found",
+            404: 'Not Found',
         },
         request_body=UpdateCartSerializer()
     )
@@ -54,7 +54,7 @@ class ItemAPI(CreateAPIView):
         operation_summary='Удалить товар из корзины клиента',
         responses={
             200: CartSerializer(),
-            404: "Not Found",
+            404: 'Not Found',
         },
         request_body=DeleteCartSerializer()
     )

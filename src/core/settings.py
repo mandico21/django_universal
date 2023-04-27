@@ -65,6 +65,8 @@ MIDDLEWARE = [
     'silk.middleware.SilkyMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 
+    'apps.common.middleware.Process500'
+
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -105,6 +107,7 @@ DATABASES = {
         'PASSWORD': env.str('DB_PASS'),
         'HOST': env.str('DB_HOST'),
         'PORT': env.str('DB_PORT'),
+        # 'ATOMIC_REQUESTS': True,
     }
 }
 

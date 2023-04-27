@@ -24,7 +24,7 @@ class CartAPI(APIView):
         operation_summary='Создать клиента и корзину',
         responses={
             201: ClientSerializer(),
-            404: "Not Found",
+            404: 'Not Found',
         }
     )
     @standardize_response(201)
@@ -38,7 +38,7 @@ class CartAPI(APIView):
         operation_summary='Получить корзину клиента',
         responses={
             200: CartSerializer(),
-            404: "Not Found",
+            404: 'Not Found',
         }
     )
     @standardize_response(200)

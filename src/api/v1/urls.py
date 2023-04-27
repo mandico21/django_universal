@@ -8,9 +8,9 @@ from api.v1.review.review import CreateNewReview
 
 urlpatterns = [
     path(
-        r'categories/sctructures/',
+        r'categories/structures/',
         ViewCategoryStructure.as_view(),
-        name='categories-sctructures'
+        name='categories-structures'
     ),
     path(r'categories/', ViewCategory.as_view(), name='categories-list'),
     path(r'products/by/', ViewProduct.as_view(), name='products-article'),

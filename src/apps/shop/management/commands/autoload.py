@@ -72,7 +72,7 @@ def load_category():
                 str(category_node.parent_id),
                 update
             )
-            if update == True:
+            if update:
                 category.save()
                 category_node.save()
                 counter_updated += 1

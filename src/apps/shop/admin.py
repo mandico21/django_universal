@@ -1,8 +1,8 @@
 from django.contrib import admin
 
 from apps.common.admin import CategoryAdminMixin, CacheAdminMixin
-from apps.shop.models import Category, CategoryNode, ProductType, Product, Attribute, ProductAttribute, \
-    AttributeValue
+from apps.shop.models import Category, CategoryNode, ProductType, Product, \
+    Attribute, ProductAttribute, AttributeValue
 from apps.user.models import Review
 
 

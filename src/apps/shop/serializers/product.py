@@ -31,7 +31,7 @@ class ProductTypeSerializer(serializers.Serializer):
         return ProductSerializer(data, many=True).data
 
     def _get_attributes(self, obj: ProductType) -> dict[str, Any]:
-        data = obj.attributes.select_related('attribute', 'value'),
+        data = obj.attributes.select_related('attribute', 'value')
         return ProductAttributeSerializer(data, many=True).data
 
     def _get_image(self, obj: ProductType) -> list[Any]:

@@ -1,7 +1,6 @@
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.request import Request
-from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.shop.serializers.product import ProductTypeSerializer
@@ -14,9 +13,24 @@ class ViewProduct(APIView):
     @swagger_auto_schema(
         tags=['Товары'],
         manual_parameters=[
-            openapi.Parameter('article', openapi.IN_QUERY, type=openapi.TYPE_INTEGER, required=False),
-            openapi.Parameter('categoryId', openapi.IN_QUERY, type=openapi.TYPE_INTEGER, required=False),
-            openapi.Parameter('brandId', openapi.IN_QUERY, type=openapi.TYPE_INTEGER, required=False),
+            openapi.Parameter(
+                'article',
+                openapi.IN_QUERY,
+                type=openapi.TYPE_INTEGER,
+                required=False
+            ),
+            openapi.Parameter(
+                'categoryId',
+                openapi.IN_QUERY,
+                type=openapi.TYPE_INTEGER,
+                required=False
+            ),
+            openapi.Parameter(
+                'brandId',
+                openapi.IN_QUERY,
+                type=openapi.TYPE_INTEGER,
+                required=False
+            ),
         ],
         operation_id='view_product',
         operation_summary='Получить товар по параметру',

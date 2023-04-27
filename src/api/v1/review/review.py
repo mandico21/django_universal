@@ -25,7 +25,9 @@ class CreateNewReview(CreateAPIView):
     def post(self, request, *args, **kwargs) -> None:
         new_review = CreateReviewSerializer(data=request.data)
         if new_review.is_valid(raise_exception=True):
-            product = ProductType.objects.filter(article=int(request.data['product_id'])).first()
+            product = ProductType.objects.filter(
+                article=int(request.data['product_id'])
+            ).first()
             if not product:
                 raise ProductNotFoundException
             Review.objects.create(**new_review.data)

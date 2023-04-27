@@ -19,10 +19,17 @@ class Categories:
     slug: str
 
 
-BASE_EXPORT_URL = "https://docs.google.com/spreadsheets/d/10eISEcboROasxeTOLy8PfNXevKOPj6uYigOfKRkVK3E/export?format=csv&gid=0"
+BASE_EXPORT_URL = \
+    "https://docs.google.com/spreadsheets/d/" \
+    "10eISEcboROasxeTOLy8PfNXevKOPj6uYigOfKRkVK3E/" \
+    "export?format=csv&gid=0"
 
 
-def compare(income: Union[str, int, bool, None], come: Union[str, int, bool, ], update: bool):
+def compare(
+        income: Union[str, int, bool, None],
+        come: Union[str, int, bool],
+        update: bool
+):
     """Compares data"""
     if income != come:
         update = True
@@ -43,25 +50,45 @@ def load_category():
         income = Categories(**row)
         category = Category.objects.filter(id=income.id).first()
         if category is not None:
-            category_node = CategoryNode.objects.filter(category_id=category.id).first()
+            category_node = CategoryNode.objects.filter(
+                category_id=category.id).first()
             update = False
-            category.name, update = compare(income.name, category.name, update)
-            category.description, update = compare(income.description, category.description, update)
-            category.slug, update = compare(income.slug, category.slug, update)
-            category_node.parent_id, update = compare(income.parent_id, str(category_node.parent_id), update)
+            category.name, update = compare(
+                income.name,
+                category.name,
+                update
+            )
+            category.description, update = compare(
+                income.description,
+                category.description,
+                update
+            )
+            category.slug, update = compare(
+                income.slug,
+                category.slug,
+                update)
+            category_node.parent_id, update = compare(
+                income.parent_id,
+                str(category_node.parent_id),
+                update
+            )
             if update == True:
                 category.save()
                 category_node.save()
                 counter_updated += 1
         else:
-            create_category = Category.objects.create(id=income.id,
-                                                      name=income.name,
-                                                      description=income.description,
-                                                      slug=income.slug)
-            CategoryNode.objects.create(id=income.id, category=create_category, parent_id=income.parent_id)
+            create_category = Category.objects.create(
+                id=income.id,
+                name=income.name,
+                description=income.description,
+                slug=income.slug
+            )
+            CategoryNode.objects.create(
+                id=income.id,
+                category=create_category,
+                parent_id=income.parent_id
+            )
             counter_created += 1
-    print(counter_created)
-    print(counter_updated)
     return counter_created, counter_updated
 
 

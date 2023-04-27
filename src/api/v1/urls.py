@@ -7,7 +7,11 @@ from api.v1.product.product import ViewProduct
 from api.v1.review.review import CreateNewReview
 
 urlpatterns = [
-    path(r'categories/sctructures/', ViewCategoryStructure.as_view(), name='categories-sctructures'),
+    path(
+        r'categories/sctructures/',
+        ViewCategoryStructure.as_view(),
+        name='categories-sctructures'
+    ),
     path(r'categories/', ViewCategory.as_view(), name='categories-list'),
     path(r'products/by/', ViewProduct.as_view(), name='products-article'),
     path(r'reviews/', CreateNewReview.as_view(), name='reviews-create'),

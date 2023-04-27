@@ -1,9 +1,9 @@
 from django.db import models
 
+from apps.common.models import TimedBaseModel
 from apps.guide.models import Warehouse
 from apps.guide.models.brand import Brand
 from apps.imageledger.models import ImageLedger
-from apps.shop.models import TimedBaseModel
 from apps.shop.services.discount_percentage import DiscountPercentage
 
 
@@ -15,11 +15,11 @@ class ProductType(TimedBaseModel):
     article = models.IntegerField('Артикул товара', primary_key=True)
     category = models.ForeignKey('CategoryNode',
                                  verbose_name='Категория',
-                                 on_delete=models.CASCADE,
+                                 on_delete=models.PROTECT,
                                  related_name='product_types')
     brand = models.ForeignKey(Brand,
                               verbose_name='Бренд',
-                              on_delete=models.CASCADE,
+                              on_delete=models.PROTECT,
                               null=True, blank=True,
                               related_name='product_types')
     images = models.ManyToManyField(ImageLedger, verbose_name='Изображение', blank=True, related_name='product_images')
@@ -47,14 +47,15 @@ class Product(TimedBaseModel):
     class Meta:
         verbose_name = 'Товар на складе'
         verbose_name_plural = 'Товары на складах'
+        unique_together = ('product', 'warehouse',)
 
     product = models.ForeignKey('ProductType',
                                 verbose_name='Товар',
-                                on_delete=models.CASCADE,
+                                on_delete=models.PROTECT,
                                 related_name='products')
     warehouse = models.ForeignKey(Warehouse,
                                   verbose_name='Магазин',
-                                  on_delete=models.CASCADE,
+                                  on_delete=models.PROTECT,
                                   related_name='products')
     quantity = models.IntegerField('Количество', default=0)
 
@@ -95,17 +96,17 @@ class ProductAttribute(TimedBaseModel):
 
     product = models.ForeignKey(ProductType,
                                 verbose_name='Товар',
-                                on_delete=models.CASCADE,
+                                on_delete=models.PROTECT,
                                 related_name='attributes')
     attribute = models.ForeignKey(Attribute,
                                   verbose_name='Аттрибуты',
-                                  on_delete=models.CASCADE,
+                                  on_delete=models.PROTECT,
                                   related_name='products')
     meaning = models.CharField('Значение', max_length=64, null=True, blank=True)
     value = models.ForeignKey(AttributeValue,
                               verbose_name='Величина',
                               null=True, blank=True,
-                              on_delete=models.CASCADE)
+                              on_delete=models.PROTECT)
 
     def __str__(self) -> str:
         return f'{self.product} / {self.attribute}'

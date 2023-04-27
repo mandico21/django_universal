@@ -1,13 +1,11 @@
 from typing import Any
 from uuid import UUID
 
-from _pytest.nodes import Item
-
-from apps.cart.models import Cart
-from apps.user.exceptions import CartNotFoundException
-from apps.user.serializers.item import CartSerializer
+from apps.cart.models import Cart, CartItem
 from apps.shop.exceptions import ProductNotFoundException
 from apps.shop.models import Product
+from apps.user.exceptions import CartNotFoundException
+from apps.user.serializers.item import CartSerializer
 
 
 class RemoveProductCart:

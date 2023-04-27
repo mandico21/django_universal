@@ -1,0 +1,15 @@
+{% extends 'admin/change_list.html' %}
+
+{% block object-tools-items %}
+    {{ block.super }}
+    <li>
+        <a href="{% url 'admin:load_category' %}"
+           style="background-color: var(--breadcrumbs-bg);"
+           class="btn btn-high btn-success button">Импортировать</a>
+    </li>
+    <li>
+        <a href="{% url 'admin:clear_cache' %}"
+           style="background-color: var(--delete-button-bg);"
+           class="btn btn-high btn-success">Очистить кеш</a>
+    </li>
+{% endblock %}

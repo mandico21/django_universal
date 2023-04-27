@@ -13,7 +13,7 @@ class CreateNewReview(CreateAPIView):
     @swagger_auto_schema(
         tags=['Отзывы'],
         operation_id='create_new_review',
-        operation_summary='Получить товары по категории',
+        operation_summary='Добавить отзыв к товару',
         responses={
             201: CreateReviewSerializer(),
             404: 'Not Found',

@@ -12,7 +12,7 @@ class ViewCartClient:
 
     def __call__(self, cart_id: str) -> dict[str, Any]:
         try:
-            cart = Cart.objects.filter(client_id=cart_id).first()
+            cart = Cart.objects.filter(client_id=cart_id).prefetch_related('items').first()
             if not cart:
                 raise CartNotFoundException
         except ValidationError:

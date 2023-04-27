@@ -17,7 +17,7 @@ class ItemAPI(CreateAPIView):
     @swagger_auto_schema(
         tags=['Корзина'],
         operation_id='add_product_to_cart',
-        operation_summary='Добавить товар в корзину',
+        operation_summary='Добавить товар в корзину клиента',
         responses={
             200: CartSerializer(),
             404: "Not Found",
@@ -34,7 +34,7 @@ class ItemAPI(CreateAPIView):
     @swagger_auto_schema(
         tags=['Корзина'],
         operation_id='update_product_to_cart',
-        operation_summary='Отредактировать товар в корзине',
+        operation_summary='Отредактировать товар в корзине клиента',
         responses={
             200: CartSerializer(),
             404: "Not Found",
@@ -51,7 +51,7 @@ class ItemAPI(CreateAPIView):
     @swagger_auto_schema(
         tags=['Корзина'],
         operation_id='remove_product_to_cart',
-        operation_summary='Удалить товар с (или из?) корзине',
+        operation_summary='Удалить товар из корзины клиента',
         responses={
             200: CartSerializer(),
             404: "Not Found",
@@ -60,7 +60,7 @@ class ItemAPI(CreateAPIView):
     )
     @standardize_response(200)
     def delete(self, request: Request, *args, **kwargs) -> dict[str, Any]:
-        delete = UpdateCartSerializer(data=request.data)
+        delete = DeleteCartSerializer(data=request.data)
         if delete.is_valid(raise_exception=True):
             return RemoveProductCart()(**delete.data)
         return delete.data

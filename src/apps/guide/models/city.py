@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.shop.models import TimedBaseModel
+from apps.common.models import TimedBaseModel
 
 
 class City(TimedBaseModel):

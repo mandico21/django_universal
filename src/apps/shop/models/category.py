@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.shop.models import TimedBaseModel
+from apps.common.models import TimedBaseModel
 
 
 class Category(TimedBaseModel):
@@ -23,11 +23,11 @@ class CategoryNode(TimedBaseModel):
         verbose_name_plural = 'Подкатегории'
 
     id = models.IntegerField('ID подкатегории', primary_key=True)
-    category = models.ForeignKey('Category', verbose_name='Категория', on_delete=models.CASCADE,
+    category = models.ForeignKey('Category', verbose_name='Категория', on_delete=models.PROTECT,
                                  related_name='category_nodes')
     parent = models.ForeignKey('self',
                                verbose_name='ID подкатегории',
-                               on_delete=models.CASCADE,
+                               on_delete=models.PROTECT,
                                null=True, blank=True,
                                related_name='childrens')
 

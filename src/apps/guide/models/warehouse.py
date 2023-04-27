@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.shop.models import TimedBaseModel
+from apps.common.models import TimedBaseModel
 from apps.guide.models import City
 
 
@@ -9,7 +9,7 @@ class Warehouse(TimedBaseModel):
         verbose_name = 'Склад'
         verbose_name_plural = 'Склады'
 
-    city = models.ForeignKey(City, verbose_name='Город', on_delete=models.CASCADE, related_name='shops')
+    city = models.ForeignKey(City, verbose_name='Город', on_delete=models.PROTECT, related_name='shops')
     name = models.CharField('Название')
     description = models.CharField('Описание', null=True, blank=True)
     address = models.CharField('Адрес магазина')

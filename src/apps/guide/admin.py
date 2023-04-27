@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from apps.common.admin import CacheAdminMixin
 from apps.guide.models import Warehouse, City
 from apps.shop.models import ProductType, Product
 
@@ -17,14 +18,14 @@ class WarehouseInline(admin.TabularInline):
 
 
 @admin.register(Warehouse)
-class WarehouseAdmin(admin.ModelAdmin):
+class WarehouseAdmin(CacheAdminMixin):
     list_display = ('name', 'city', 'description', 'address',)
     list_display_links = ('name', 'city',)
     inlines = [ProductInline]
 
 
 @admin.register(City)
-class CityAdmin(admin.ModelAdmin):
+class CityAdmin(CacheAdminMixin):
     list_display = ('name', 'code',)
     list_display_links = ('name', 'code',)
     inlines = [WarehouseInline]

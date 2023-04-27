@@ -1,6 +1,7 @@
 from django.db import models
 
-from apps.shop.models import TimedBaseModel, ProductType, CategoryNode, Product
+from apps.common.models import TimedBaseModel
+from apps.shop.models import ProductType, CategoryNode, Product
 
 
 class Discount(TimedBaseModel):
@@ -36,7 +37,7 @@ class Coupon(TimedBaseModel):
     name = models.CharField('Название', max_length=64)
     description = models.CharField('Описание', max_length=255, null=True, blank=True)
     code = models.CharField('Купон', max_length=64)
-    discount = models.ForeignKey(Discount, verbose_name='Скидка для купона', on_delete=models.CASCADE)
+    discount = models.ForeignKey(Discount, verbose_name='Скидка для купона', on_delete=models.PROTECT)
     start_date = models.DateField('Дата начала')
     end_date = models.DateField('Дата окончания')
     is_active = models.BooleanField('Активна', default=True)
@@ -52,7 +53,7 @@ class Gift(TimedBaseModel):
 
     name = models.CharField('Название', max_length=64)
     description = models.CharField('Описание', max_length=255, null=True, blank=True)
-    product = models.ForeignKey(Product, verbose_name='Товар', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, verbose_name='Товар', on_delete=models.PROTECT)
 
     def __str__(self) -> str:
         return f'{self.name} {self.product}'
@@ -63,7 +64,7 @@ class GiftCoupon(TimedBaseModel):
         verbose_name = 'Купон подарка'
         verbose_name_plural = 'Купоны подарков'
 
-    gift = models.ForeignKey(Gift, verbose_name='Подарок', on_delete=models.CASCADE)
+    gift = models.ForeignKey(Gift, verbose_name='Подарок', on_delete=models.PROTECT)
     code = models.CharField('Купон', max_length=64)
     start_date = models.DateField('Дата начала')
     end_date = models.DateField('Дата окончания')

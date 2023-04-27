@@ -13,7 +13,7 @@ class ViewCategoryStructure(RetrieveAPIView):
     @swagger_auto_schema(
         tags=['Категории'],
         operation_id='view_category_structure',
-        operation_summary='Получение категорий в структуре',
+        operation_summary='Получить структуру категорий',
         responses={200: CategoryNodeSerializer(many=True)},
     )
     @standardize_response(200)
@@ -28,7 +28,7 @@ class ViewCategory(ListAPIView):
     @swagger_auto_schema(
         tags=['Категории'],
         operation_id='view_category',
-        operation_summary='Получение всех категорий',
+        operation_summary='Получить все категории',
         responses={
             200: CategorySerializer(many=True)
         },

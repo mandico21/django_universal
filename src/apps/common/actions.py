@@ -13,5 +13,8 @@ def clear_cache(request: HttpRequest) -> HttpResponseRedirect:
 
 def load_categories(request: HttpRequest) -> HttpResponseRedirect:
     counter_created, counter_updated = load_category()
-    messages.info(request, f'Категории успешно импортированы. Обновлено {counter_updated} Создано {counter_created}')
+    text = f'Категории успешно импортированы. ' \
+           f'Обновлено {counter_updated} ' \
+           f'Создано {counter_created}'
+    messages.info(request, text)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

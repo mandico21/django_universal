@@ -10,7 +10,11 @@ from apps.user.serializers.item import CartSerializer
 
 class RemoveProductCart:
 
-    def __call__(self, cart_id: UUID | str, product_id: int) -> dict[str, Any]:
+    def __call__(
+            self,
+            cart_id: UUID | str,
+            product_id: int
+    ) -> dict[str, Any]:
         cart = Cart.objects.filter(client_id=cart_id).first()
         if not cart:
             raise CartNotFoundException
@@ -19,7 +23,10 @@ class RemoveProductCart:
         if not product:
             raise ProductNotFoundException
 
-        item = CartItem.objects.filter(cart_id=cart.id, product_id=product_id).first()
+        item = CartItem.objects.filter(
+            cart_id=cart.id,
+            product_id=product_id
+        ).first()
         if item:
             item.delete()
         else:

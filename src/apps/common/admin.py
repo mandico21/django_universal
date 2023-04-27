@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.urls import path
 
 from apps.common.actions import clear_cache, load_categories
-from apps.shop.management.commands.autoload import load_category
 
 
 class BaseModelAdmin(admin.ModelAdmin):

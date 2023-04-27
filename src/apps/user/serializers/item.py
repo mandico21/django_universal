@@ -23,10 +23,12 @@ class CartSerializer(serializers.Serializer):
     total_amount = serializers.IntegerField()
 
     def _get_items(self, obj: Cart) -> dict[str, Any]:
-        return ItemSerializer(obj.items.select_related('product'), many=True).data
+        data = obj.items.select_related('product')
+        return ItemSerializer(data, many=True).data
 
     def _get_price(self, obj: Cart) -> int:
-        return obj.items.aggregate(total_amount=Sum(F('product__product__price') * F('quantity')))['total_amount']
+        total_amount = Sum(F('product__product__price') * F('quantity'))
+        return obj.items.aggregate(total_amount=total_amount)['total_amount']
 
 
 class UpdateCartSerializer(serializers.Serializer):

@@ -9,7 +9,12 @@ class Warehouse(TimedBaseModel):
         verbose_name = 'Склад'
         verbose_name_plural = 'Склады'
 
-    city = models.ForeignKey(City, verbose_name='Город', on_delete=models.PROTECT, related_name='shops')
+    city = models.ForeignKey(
+        City,
+        verbose_name='Город',
+        on_delete=models.PROTECT,
+        related_name='shops'
+    )
     name = models.CharField('Название')
     description = models.CharField('Описание', null=True, blank=True)
     address = models.CharField('Адрес магазина')

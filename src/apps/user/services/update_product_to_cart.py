@@ -12,7 +12,12 @@ from apps.user.serializers.item import CartSerializer
 
 class UpdateProductCart:
 
-    def __call__(self, cart_id: UUID | str, product_id: int, quantity: int) -> dict[str, Any]:
+    def __call__(
+            self,
+            cart_id: UUID | str,
+            product_id: int,
+            quantity: int
+    ) -> dict[str, Any]:
         try:
             cart = Cart.objects.filter(client_id=cart_id).first()
             if not cart:
@@ -24,7 +29,10 @@ class UpdateProductCart:
         if not product:
             raise ProductNotFoundException
 
-        item = CartItem.objects.filter(cart_id=cart.id, product_id=product_id).first()
+        item = CartItem.objects.filter(
+            cart_id=cart.id,
+            product_id=product_id
+        ).first()
         if item:
             item.quantity -= quantity
             if item.quantity < 0:

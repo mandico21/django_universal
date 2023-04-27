@@ -10,8 +10,16 @@ class Favorite(TimedBaseModel):
         verbose_name = 'Избранное'
         verbose_name_plural = 'Избранные'
 
-    client = models.ForeignKey(Client, verbose_name='Покупатель', on_delete=models.PROTECT)
-    product = models.ForeignKey(ProductType, verbose_name='Товар', on_delete=models.PROTECT)
+    client = models.ForeignKey(
+        Client,
+        verbose_name='Покупатель',
+        on_delete=models.PROTECT
+    )
+    product = models.ForeignKey(
+        ProductType,
+        verbose_name='Товар',
+        on_delete=models.PROTECT
+    )
 
     def __str__(self) -> str:
         return f'{self.client} {self.product}'

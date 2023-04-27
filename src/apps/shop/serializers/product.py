@@ -15,7 +15,11 @@ class ProductTypeSerializer(serializers.Serializer):
     poster = serializers.CharField(source='img_path')
     name = serializers.CharField()
     description = serializers.CharField()
-    basePrice = serializers.DecimalField(max_digits=10, decimal_places=2, source='base_price')
+    basePrice = serializers.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        source='base_price'
+    )
     price = serializers.DecimalField(max_digits=10, decimal_places=2)
     discount = serializers.IntegerField()
     attributes = serializers.SerializerMethodField('_get_attributes')
@@ -23,10 +27,12 @@ class ProductTypeSerializer(serializers.Serializer):
     reviews = serializers.SerializerMethodField('_get_review')
 
     def _get_info(self, obj: ProductType) -> dict[str, Any]:
-        return ProductSerializer(obj.products.select_related('warehouse'), many=True).data
+        data = obj.products.select_related('warehouse')
+        return ProductSerializer(data, many=True).data
 
     def _get_attributes(self, obj: ProductType) -> dict[str, Any]:
-        return ProductAttributeSerializer(obj.attributes.select_related('attribute', 'value'), many=True).data
+        data = obj.attributes.select_related('attribute', 'value'),
+        return ProductAttributeSerializer(data, many=True).data
 
     def _get_image(self, obj: ProductType) -> list[Any]:
         return [str(im.url_path) for im in obj.images.all()]
@@ -43,7 +49,11 @@ class ProductTypeListSerializer(serializers.Serializer):
     categoryId = serializers.IntegerField(source='category_id')
     poster = serializers.CharField(source='img_path')
     name = serializers.CharField()
-    basePrice = serializers.DecimalField(max_digits=10, decimal_places=2, source='base_price')
+    basePrice = serializers.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        source='base_price'
+    )
     price = serializers.DecimalField(max_digits=10, decimal_places=2)
     discount = serializers.IntegerField()
     count = serializers.SerializerMethodField('_get_count_quantity_product')

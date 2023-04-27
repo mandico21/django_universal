@@ -2,14 +2,21 @@ from typing import Dict
 
 from django.core.cache import cache
 
-from apps.shop.exceptions import ProductNotFoundException, CategoryNotFoundException, IncorrectParametersException
+from apps.shop.exceptions import ProductNotFoundException, \
+    CategoryNotFoundException, IncorrectParametersException
 from apps.shop.models import ProductType
-from apps.shop.serializers.product import ProductTypeSerializer, ProductTypeListSerializer
+from apps.shop.serializers.product import ProductTypeSerializer, \
+    ProductTypeListSerializer
 
 
 class GetByParameters:
 
-    def __call__(self, article: int, category_id: int, brand_id: int) -> Dict:
+    def __call__(
+            self,
+            article: int,
+            category_id: int,
+            brand_id: int
+    ) -> Dict:
         if article and category_id and brand_id:
             raise IncorrectParametersException
         elif article:

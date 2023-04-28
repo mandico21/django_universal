@@ -7,67 +7,61 @@ on:
     branches: [ 'dev' ]
 
 jobs:
-  job1:
-    build:
+  build:
 
-      runs-on: ubuntu-latest
-      strategy:
-        max-parallel: 4
-        matrix:
-          python-version: [ 3.11 ]
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [ 3.11 ]
 
-      steps:
-        - uses: actions/checkout@v3
-        - name: 🐍 Set up Python ${{ matrix.python-version }}
-          uses: actions/setup-python@v3
-          with:
-            python-version: ${{ matrix.python-version }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: 🐍 Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
 
-        - name: 🧰 Install Dependencies
-          run: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
+      - name: 🧰 Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-        #      - name: Make envfile
-        #        uses: SpicyPizza/create-envfile@v1.3
-        #        with:
-        #          DEBUG: true
-        #          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        #          file_name: .env_dist
-        #          fail_on_empty: false
-        #        env:
-        #          DEBUG: true
-        #          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      #      - name: Make envfile
+      #        uses: SpicyPizza/create-envfile@v1.3
+      #        with:
+      #          DEBUG: true
+      #          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      #          file_name: .env_dist
+      #          fail_on_empty: false
+      #        env:
+      #          DEBUG: true
+      #          SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
-        #      - name: Run Tests
-        #        run: |
-        #          pytest -v
-        #        env:
-        #          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        #          DEBUG: true
-        #          DB_USER: ${{ secrets.DB_USER }}
-        #          DB_PASS: ${{ secrets.DB_PASS }}
-        #          DB_NAME: ${{ secrets.DB_NAME }}
-        #          DB_HOST: ${{ secrets.DB_HOST }}
-        #          DB_PORT: ${{ secrets.DB_PORT }}
+      #      - name: Run Tests
+      #        run: |
+      #          pytest -v
+      #        env:
+      #          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      #          DEBUG: true
+      #          DB_USER: ${{ secrets.DB_USER }}
+      #          DB_PASS: ${{ secrets.DB_PASS }}
+      #          DB_NAME: ${{ secrets.DB_NAME }}
+      #          DB_HOST: ${{ secrets.DB_HOST }}
+      #          DB_PORT: ${{ secrets.DB_PORT }}
 
-        - name: 🩹 Run flake8
-          run: |
-            python -m flake8 --exit-zero
-  job2:
-    needs: job1
-    build:
-      name: Job 1
-
-      run_pull:
-        name: 🚀 Run server deploy
-        runs-on: ubuntu-latest
-
-        steps:
-          - name: 🔐 Install ssh keys
-            run: |
-              install -m 600 -D /dev/null ~/.ssh/id_rsa
-              echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-              ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
-          - name: ♻️ Connect and update project
-            run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && sudo systemctl restart gunicorn && exit"
+      - name: 🩹 Run flake8
+        run: |
+          python -m flake8 --exit-zero
+#  run_pull:
+#    name: 🚀 Run server deploy
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: 🔐 Install ssh keys
+#        run: |
+#          install -m 600 -D /dev/null ~/.ssh/id_rsa
+#          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+#          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+#      - name: ♻️ Connect and update project
+#        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && sudo systemctl restart gunicorn && exit"

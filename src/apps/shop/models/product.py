@@ -4,6 +4,7 @@ from apps.common.models import TimedBaseModel
 from apps.guide.models import Warehouse
 from apps.guide.models.brand import Brand
 from apps.imageledger.models import ImageLedger
+from apps.shop.models import CategoryNode
 from apps.shop.services.discount_percentage import DiscountPercentage
 
 
@@ -14,7 +15,7 @@ class ProductType(TimedBaseModel):
 
     article = models.IntegerField('Артикул товара', primary_key=True)
     category = models.ForeignKey(
-        'CategoryNode',
+        CategoryNode,
         verbose_name='Категория',
         on_delete=models.PROTECT,
         related_name='product_types'

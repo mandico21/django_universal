@@ -10,6 +10,7 @@ jobs:
   build:
 
   job1:
+    name: Job 1
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
@@ -55,7 +56,8 @@ jobs:
         run: |
           python -m flake8 --exit-zero
   job2:
-    needs: [job1]
+    name: Job 1
+    needs: job1
     run_pull:
       name: 🚀 Run server deploy
       runs-on: ubuntu-latest

@@ -53,15 +53,16 @@ jobs:
       - name: 🩹 Run flake8
         run: |
           python -m flake8 --exit-zero
-#  run_pull:
-#    name: 🚀 Run server deploy
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - name: 🔐 Install ssh keys
-#        run: |
-#          install -m 600 -D /dev/null ~/.ssh/id_rsa
-#          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-#          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
-#      - name: ♻️ Connect and update project
-#        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && sudo systemctl restart gunicorn && exit"
+  run_pull:
+    needs: build
+    name: 🚀 Run server deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔐 Install ssh keys
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+      - name: ♻️ Connect and update project
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && sudo systemctl restart gunicorn && exit"

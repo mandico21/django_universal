@@ -64,9 +64,6 @@ MIDDLEWARE = [
 
     'silk.middleware.SilkyMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-
-    'apps.common.middleware.Process500'
-
 ]
 
 ROOT_URLCONF = 'core.urls'

@@ -30,9 +30,9 @@ class GetByParameters:
 
     def get_by_article(self, article: int) -> Dict:
         cache_key = f'product_type:article={article}'
-        data = cache.get(cache_key)
-        if data:
-            return data
+        product = cache.get(cache_key)
+        if product:
+            return ProductTypeSerializer(product).data
 
         product = ProductType.objects.filter(article=article).first()
         if not product:

@@ -50,4 +50,4 @@ class Client(TimedBaseModel):
         return f'{self.first_name} {self.last_name}'
 
     def __str__(self) -> str:
-        return f'{self.uuid}'
+        return f'{self.uuid} / {self.full_name}'

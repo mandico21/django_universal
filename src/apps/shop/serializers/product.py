@@ -40,9 +40,6 @@ class ProductTypeSerializer(serializers.Serializer):
     def _get_review(self, obj: ProductType) -> dict[str, Any]:
         return ReviewSerializer(obj.reviews, many=True).data
 
-    # def _get_brand(self, obj: ProductType) -> str:
-    #     return obj.brand.name if obj.brand else None
-
 
 class ProductTypeListSerializer(serializers.Serializer):
     article = serializers.IntegerField()

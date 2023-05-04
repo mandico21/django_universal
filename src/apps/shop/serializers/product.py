@@ -72,6 +72,6 @@ class ProductSerializer(serializers.Serializer):
 
 
 class ProductAttributeSerializer(serializers.Serializer):
-    name = serializers.CharField(source='attribute')
+    name = serializers.CharField(source='attribute.name')
     meaning = serializers.CharField()
-    value = serializers.CharField()
+    value = serializers.CharField(source='value.name')

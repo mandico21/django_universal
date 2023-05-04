@@ -1,8 +1,6 @@
 from typing import Any
 from uuid import UUID
 
-from django.core.exceptions import ValidationError
-
 from apps.cart.models import Cart, CartItem
 from apps.shop.exceptions import ProductNotFoundException
 from apps.shop.models import Product
@@ -18,11 +16,8 @@ class UpdateProductCart:
             product_id: int,
             quantity: int
     ) -> dict[str, Any]:
-        try:
-            cart = Cart.objects.filter(client_id=cart_id).first()
-            if not cart:
-                raise CartNotFoundException
-        except ValidationError:
+        cart = Cart.objects.filter(client_id=cart_id).first()
+        if not cart:
             raise CartNotFoundException
 
         product = Product.objects.filter(id=product_id).first()
@@ -35,7 +30,7 @@ class UpdateProductCart:
         ).first()
         if item:
             item.quantity -= quantity
-            if item.quantity < 0:
+            if item.quantity <= 0:
                 item.delete()
             else:
                 item.save()

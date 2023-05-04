@@ -13,9 +13,9 @@ class GetByParameters:
 
     def __call__(
             self,
-            article: int,
-            category_id: int,
-            brand_id: int
+            article: int | None,
+            category_id: int | None,
+            brand_id: int | None
     ) -> Dict:
         if article and category_id and brand_id:
             raise IncorrectParametersException

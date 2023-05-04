@@ -87,7 +87,8 @@ TEMPLATES = [
 ]
 
 REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER': 'core.responses.custom_exception_handler'
+    'EXCEPTION_HANDLER': 'core.responses.custom_exception_handler',
+    'DATETIME_FORMAT': '%Y-%m-%d %H:%M:%S',
 }
 
 SWAGGER_SETTINGS = {
@@ -150,7 +151,7 @@ STATICFILES_FINDERS = [
 STATICFILES_STORAGE = \
     'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'stati c')
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

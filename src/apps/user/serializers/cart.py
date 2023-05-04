@@ -1,10 +1,16 @@
 from rest_framework import serializers
 
+from apps.user.models import Client
 
-class ClientSerializer(serializers.Serializer):
-    uuid = serializers.UUIDField()
-    first_name = serializers.CharField()
-    middle_name = serializers.CharField()
-    last_name = serializers.CharField()
-    phone = serializers.CharField()
-    email = serializers.CharField()
+
+class ClientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Client
+        fields = (
+            'uuid',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'phone',
+            'email',
+        )

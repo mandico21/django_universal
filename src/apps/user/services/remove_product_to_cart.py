@@ -27,8 +27,8 @@ class RemoveProductCart:
             cart_id=cart.id,
             product_id=product_id
         ).first()
-        if item:
-            item.delete()
-        else:
+        if item is None:
             raise ProductNotFoundException
+
+        item.delete()
         return CartSerializer(cart).data

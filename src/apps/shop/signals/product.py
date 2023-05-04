@@ -15,7 +15,6 @@ def clear_product_cache(
     cache_key_category = \
         f'category_node_product_types:category_id={instance.category_id}'
     cache_key_brand = f'brand_product_types:brand_id={instance.brand_id}'
-    
     for k in [
         cache_key_product,
         cache_key_category,

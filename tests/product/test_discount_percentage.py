@@ -1,5 +1,3 @@
-from unittest import TestCase
-
 from apps.shop.services.discount_percentage import DiscountPercentage
 
 

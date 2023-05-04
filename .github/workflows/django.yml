@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-
+    name: 🚀 Check code linter
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
@@ -27,41 +27,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      #      - name: Make envfile
-      #        uses: SpicyPizza/create-envfile@v1.3
-      #        with:
-      #          DEBUG: true
-      #          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      #          file_name: .env_dist
-      #          fail_on_empty: false
-      #        env:
-      #          DEBUG: true
-      #          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-
-      #      - name: Run Tests
-      #        run: |
-      #          pytest -v
-      #        env:
-      #          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      #          DEBUG: true
-      #          DB_USER: ${{ secrets.DB_USER }}
-      #          DB_PASS: ${{ secrets.DB_PASS }}
-      #          DB_NAME: ${{ secrets.DB_NAME }}
-      #          DB_HOST: ${{ secrets.DB_HOST }}
-      #          DB_PORT: ${{ secrets.DB_PORT }}
-
       - name: 🩹 Run flake8
         run: |
-          python -m flake8 --exit-zero
+          python -m flake8
+
   run_pull:
-    name: run pull
+    needs: build
+    name: 🚀 Run server deploy
     runs-on: ubuntu-latest
 
     steps:
-      - name: install ssh keys
+      - name: 🔐 Install ssh keys
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_rsa
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
-      - name: connect and pull
+      - name: ♻️ Connect and update project
         run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && sudo systemctl restart gunicorn && exit"

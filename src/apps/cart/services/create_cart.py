@@ -17,4 +17,4 @@ class CreateCart:
             client = Client.objects.create()
             cart = Cart.objects.create(client=client)
 
-        return
+        return cart

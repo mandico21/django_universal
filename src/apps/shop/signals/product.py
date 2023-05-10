@@ -56,7 +56,8 @@
 #             f'category_node_product_types:category_id={category_node.id}'
 #         cache.delete(cache_key_category)
 #         for product_type in category_node.product_types.all():
-#             cache_key_product = f'product_type:article={product_type.article}'
+#             cache_key_product = f'product_type:
+#             article={product_type.article}'
 #             cache.delete(cache_key_product)
 #
 #     cache_categories = 'categories'

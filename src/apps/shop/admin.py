@@ -46,7 +46,6 @@ class ProductTypeAdmin(CacheAdminMixin):
     filter_horizontal = ('images',)
     list_filter = ('category', 'brand',)
     inlines = [AttributeInline, ReviewInline, ProductInline]
-    save_on_top = True
     fieldsets = [
         (None, {
             'fields': (('article', 'category', 'brand',),)
